@@ -9,16 +9,12 @@ function TodoApp() {
 
     let { todoItem, value } = todoList;
     let [todo, setTodo] = useState(todoList);
-
-    const addTodoItem = (value) => {
-        setTodo({todoItem : [...todoItem,value]})
-        console.log(todoItem)
-    }
+    console.log()
 
     return (
         <div>
-            <input value={value} onChange={(e) => setTodo({value : e.target.value})} type="text" placeholder="Enter Todos Name..." />
-            <button onClick={addTodoItem}>Add Todo</button>
+            <input onChange={(e) => setTodo({ value: e.target.value })} type="text" placeholder="Enter Todos Name..." />
+            <button>Add Todo</button>
             {
                 todoItem.map((todoName, ind) => {
                     return <li key={ind}>{todoName}</li>

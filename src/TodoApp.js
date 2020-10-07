@@ -2,19 +2,25 @@ import React, { useState } from 'react'
 
 function TodoApp() {
 
-    let initTodo =["bilal","zubi"]
-    let [Todo, setTodo] = useState(initTodo)
+    let todoList = {
+        todoItem: ["bilal", "jawad", "ali"],
+        value: '',
+    }
 
-    const changeTodoList = e => {
-        console.log(e.target.value)
+    let { todoItem, value } = todoList;
+    let [todo, setTodo] = useState(todoList);
+
+    const addTodoItem = (value) => {
+        setTodo({todoItem : [...todoItem,value]})
+        console.log(todoItem)
     }
 
     return (
         <div>
-            <input value="" onChange={changeTodoList} type="text" placeholder="Enter todo name" />
-            <button onClick={()=>{setTodo()}}>Add Todo</button>
+            <input value={value} onChange={(e) => setTodo({value : e.target.value})} type="text" placeholder="Enter Todos Name..." />
+            <button onClick={addTodoItem}>Add Todo</button>
             {
-                Todo.map((todoName, ind) => {
+                todoItem.map((todoName, ind) => {
                     return <li key={ind}>{todoName}</li>
                 })
             }

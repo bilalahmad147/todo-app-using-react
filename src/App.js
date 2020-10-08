@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
-import TodoApp from './TodoApp';
+import Header from './components/Header';
+import TodoApp from './components/TodoApp';
 
 function App() {
   return (
     <div className="App">
+      <Header />
       <TodoApp />
     </div>
   );

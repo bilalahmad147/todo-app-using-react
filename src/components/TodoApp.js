@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import firebase from '../config/firebase'
 
 function TodoApp() {
 
     let [todo, setTodo] = useState("");
-    let [todos, setTodos] = useState(['bilal']);
+    let [todos, setTodos] = useState([]);
 
     const handleChange = e => {
         setTodo(e.target.value)
@@ -11,19 +12,22 @@ function TodoApp() {
     const saveChanges = (e) => {
         e.preventDefault();
         todos = [...todos, todo];
+        firebase.database().ref('/').child('todos').push(todo)
         setTodos(todos)
         setTodo('')
     }
-    const deleteTodo = (ind) => {
-        todos = todos.splice(ind,1)
+    const deleteTodo = (index) => {
+        todos = todos.splice(index, 1)
         setTodos(todos)
     }
 
     return (
         <div>
             <h2>Enter Todays Plan ?</h2>
-            <input value={todo} onChange={handleChange} type="text" placeholder="Todo Name" />
-            <button onClick={saveChanges}>Add Todo</button>
+            <form>
+                <input required value={todo} onChange={handleChange} type="text" placeholder="Todo Name" />
+                <button onClick={saveChanges}>Add Todo</button>
+            </form>
             <ul>
                 {
                     todos.map((obj, ind) => {
